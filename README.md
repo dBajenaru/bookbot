@@ -1,2 +1,3 @@
 # bookbot
-A book anylyzing CLI tool.
+
+BookBot is my first [Boot.dev](https://www.boot.dev) project!
