@@ -16,6 +16,7 @@ def count_characters(text):
     return char_count
 
 
+
 # sort() key method
 def sort_on(items):
     return items["count"]
