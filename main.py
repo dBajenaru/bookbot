@@ -1,34 +1,40 @@
 import stats
+import sys
 import pdb
 
 
-def get_book_text(filepath):
+def get_text(filepath):
     with open(filepath) as f:
         return f.read()
 
 
+def pretty_print(text, wc, chars):
+    print("============ BOOKBOT ============")
+    print("Analyzing book found at", text)
+    print("----------- Word Count ----------")
+    print("Found", wc, "total words")
+    print("--------- Character Count -------")
+
+    for x in chars:
+        if x["char"].isalpha():
+            print(x["char"] + ":", x["count"])
+
+    print("============= END ===============")
+
+
 def main():
-    frankenstein = "books/frankenstein.txt"
-    text = get_book_text(frankenstein)
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    text_fp = sys.argv[1]
+    text = get_text(text_fp)
+
     word_count = stats.count_words(text)
-    char_count = stats.count_characters(text) # this is char dict
-
-    breakpoint()
+    char_count = stats.count_characters(text)
     sorted_chars = stats.sort_characters(char_count)
-#    print(char_count)
-    print(sorted_chars)
 
-    """
-    split_dict = stats.split_dictionary(char_count)
-    print(split_dict)
-    split_dict.sort(reverse=True, key=stats.sort_on)
-    print(split_dict)
-    """
-
-#    sort_chars = stats.sort_characters(char_count)
-    print(word_count, "words found in the document")
-#    print(char_count)
-#    print(sort_chars)
+    pretty_print(text_fp, word_count, sorted_chars)
 
 
 main()
